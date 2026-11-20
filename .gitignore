@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Training artefacts that should stay local
+*.log
+*.tmp
+*.swp
+checkpoints/
+!code/best_task_model.pth
+
+# Scratch outputs
+results/_tmp/

@@ -1,0 +1,16 @@
+﻿item,value
+AUC (simulated positives + real negatives),0.9999926666666666
+AUC (real positives + real negatives),0.9803614457831326
+ΔAUC (domain shortcut inflation),0.019631220883534084
+Recall@0.5 (simulated positives),0.9993333333333333
+Recall@0.5 (real positives),0.6987951807228916
+bootstrap AUC mean (n_pos matched),0.9999923975903614
+bootstrap AUC std (n_pos matched),1.3825735615407535e-05
+bootstrap p-value (one-sided),0.0
+official sim-val AUC (3000+3000),0.999996
+mean prob (simulated lenses),0.9989328244595478
+mean prob (real lenses),0.6800943329285789
+P(prob>0.99) simulated,0.9936666666666667
+P(prob>0.99) real,0.3253012048192771
+KS statistic,0.8911646586345382
+KS p-value,2.8900765258515622e-146

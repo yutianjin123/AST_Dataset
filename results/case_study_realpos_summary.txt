@@ -1,0 +1,8 @@
+共同漏检的真实透镜：15 个；其中 real_pos 14 个、516 1 个
+
+严格独有正确样本：8 个
+   ResNet18 (base)      2 个   
+   ResNet18 + MTL + DA  1 个   （含 DA）
+   Swin-T + DA          4 个   （含 DA）
+   Swin-T + MTL + DA    1 个   （含 DA）
+   含 DA 的变体合计 6 / 8

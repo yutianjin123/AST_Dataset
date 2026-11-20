@@ -1,0 +1,6 @@
+# The single released checkpoint is ~50 MB and is tracked through Git LFS.
+code/best_task_model.pth filter=lfs diff=lfs merge=lfs -text
+
+# FITS cutouts are binary image data.
+*.fits binary
+*.png binary

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this code, the example cutouts or the released checkpoint, please cite the associated manuscript."
+title: "PhyMTL-ADA: Physics-aware Multi-task Learning with Adversarial Domain Adaptation for Simulation-to-Real Strong Gravitational Lens Detection"
+type: software
+authors:
+  - family-names: Yu
+    given-names: Tianjin
+year: 2026
+repository-code: "https://github.com/yutianjin123/AST_Dataset"
+license: MIT
+keywords:
+  - strong gravitational lensing
+  - domain adaptation
+  - multi-task learning
+  - simulation-to-real
+  - KiDS

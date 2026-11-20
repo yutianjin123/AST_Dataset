@@ -1,0 +1,10 @@
+# Minimum dependencies for running inference.py on the example cutouts.
+torch>=2.0
+torchvision>=0.15
+numpy>=1.23
+
+# Optional: if installed, fits_io.py uses astropy instead of its built-in reader.
+# astropy>=5.0
+
+# Optional: only needed if you read config.yaml programmatically.
+# PyYAML>=6.0

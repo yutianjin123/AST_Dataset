@@ -1,0 +1,40 @@
+# Training configuration of the released best model (ResNet18 + MTL + DA).
+# Server-specific absolute paths have been replaced by placeholders; the full
+# training corpus and split manifests are available from the author on request.
+
+data_root: "<PATH_TO>/data/raw"
+source_train_csv: "<PATH_TO>/train.csv"   # labelled source (simulated + real negatives)
+source_val_csv: "<PATH_TO>/val.csv"       # labelled source validation split
+target_train_csv: "<PATH_TO>/target.csv"  # unlabelled real target domain
+
+checkpoint_dir: "./checkpoints"
+
+# Task definition
+num_classes_bin: 2          # lens / non-lens
+num_classes_count: 5        # image multiplicity classes
+
+# Optimisation
+input_size: 224
+batch_size: 32
+epochs: 300
+learning_rate: 1.0e-4
+device: "cuda"
+pretrained: false           # random initialisation, no ImageNet weights
+
+# Loss weights
+w_bin: 1.0
+w_count: 0.3
+w_rein: 0.2
+w_rule1_num: 0.5
+w_rule1_rein: 0.5
+w_rule2: 0.5
+pos_weight: 3.0
+
+# Domain adaptation (DANN + gradient reversal layer)
+use_dann: true
+w_domain: 1.0
+dann_gamma: 10
+
+# Photometric preprocessing
+use_asinh: true
+clip_percentile: 99.9

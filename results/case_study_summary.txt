@@ -1,0 +1,84 @@
+==============================================================================
+个案分析 · 有图可用的原始测试集（N=516，真实透镜 16 个，非透镜 500 个）
+阈值 0.5，判对 = 预测类别与真值一致
+==============================================================================
+
+[1] 判对模型数分布（0 = 全体判错，8 = 全体判对）
+   判对模型数 |    全体 |     真实透镜 |     非透镜
+       0 |     1 |        1 |       0
+       1 |     0 |        0 |       0
+       2 |     1 |        1 |       0
+       3 |     3 |        2 |       1
+       4 |     0 |        0 |       0
+       5 |     4 |        2 |       2
+       6 |     7 |        4 |       3
+       7 |     6 |        1 |       5
+       8 |   494 |        5 |     489
+
+  完全一致判对 494 个（95.7%），存在分歧 21 个（4.1%），全体判错 1 个（0.2%）
+
+[2] 8 组模型在该子集上的混淆量（注意：这是 516 口径，与论文主表 666 口径不同）
+模型                     TP   FP   FN   TN   Recall  Precision
+ResNet18 (base)        11    2    5  498   0.6875     0.8462
+ResNet18 + MTL         10    0    6  500   0.6250     1.0000
+ResNet18 + DA          10    2    6  498   0.6250     0.8333
+ResNet18 + MTL + DA    13    0    3  500   0.8125     1.0000
+Swin-T (base)           8    0    8  500   0.5000     1.0000
+Swin-T + MTL            9    1    7  499   0.5625     0.9000
+Swin-T + DA            14   11    2  489   0.8750     0.5600
+Swin-T + MTL + DA      14    6    2  494   0.8750     0.7000
+
+[3] 严格独有正确（仅该模型判对、其余 7 个全部判错）
+  无。该子集上不存在任何「仅一个模型判对」的样本。
+  （对照：在含 150 个新增真实透镜的全 666 集上，这类样本有 2 个，见正文 4.8 节发现 4）
+
+[4] 渐弱口径（同一骨干内，完整模型 +MTL+DA 判对、而对照变体判错的样本数）
+对照变体                            完整模型判对 & 该变体判错
+  vs ResNet18 + MTL + DA ← ResNet18 (base)     增益   5   反向   1
+  vs ResNet18 + MTL + DA ← ResNet18 + MTL      增益   3   反向   0
+  vs ResNet18 + MTL + DA ← ResNet18 + DA       增益   6   反向   1
+  vs Swin-T + MTL + DA ← Swin-T (base)       增益   6   反向   6
+  vs Swin-T + MTL + DA ← Swin-T + MTL        增益   5   反向   5
+  vs Swin-T + MTL + DA ← Swin-T + DA         增益   6   反向   1
+
+[5] 共同盲区（8 个模型全部判错）
+  ra_224.69829_dec_-2.03496  label=1  max_prob=0.001019
+
+[6] 误报账本（非透镜被至少一个模型判为透镜）
+  被 ≥1 个模型误报的非透镜：11 个 / 500
+样本                                               误报模型数   误报者
+  ra_12.17579_dec_-32.234241                         3   ResNet18 (base), Swin-T + DA, Swin-T + MTL + DA
+  ra_132.460657_dec_-1.795358                        2   Swin-T + DA, Swin-T + MTL + DA
+  ra_136.10939_dec_1.199491                          5   ResNet18 (base), ResNet18 + DA, Swin-T + MTL, Swin-T + DA, Swin-T + MTL + DA
+  ra_141.065088_dec_2.808542                         1   Swin-T + DA
+  ra_189.895974_dec_-0.987472                        1   Swin-T + DA
+  ra_210.63932_dec_2.077911                          2   Swin-T + DA, Swin-T + MTL + DA
+  ra_216.475114_dec_-2.955746                        1   Swin-T + DA
+  ra_221.407792_dec_-3.125718                        1   Swin-T + DA
+  ra_338.037657_dec_-30.455521                       2   Swin-T + DA, Swin-T + MTL + DA
+  ra_349.599477_dec_-29.994004                       1   Swin-T + DA
+  ra_35.894227_dec_-32.681079                        3   ResNet18 + DA, Swin-T + DA, Swin-T + MTL + DA
+
+[7] 逐样本总表 -> D:\AST\paper_eval\results\case_study_samples.csv
+[8] 成对差异表 -> D:\AST\paper_eval\results\case_study_pairwise.csv
+
+[图] D:\AST\figures\fig13_lens_panel.png
+[图] D:\AST\figures\fig14_false_positive.png
+[图] D:\AST\figures\fig15_case_examples.png
+  个案 (a) The one sample missed by all 8 models: ra_224.69829_dec_-2.03496  label=1  n_correct=0
+  个案 (b) Disputed lens recovered only by the full model: ra_203.894979_dec_1.301553  label=1  n_correct=3
+  个案 (c) Non-lens flagged only by DA variants: ra_141.065088_dec_2.808542  label=0  n_correct=7
+  个案 (d) Unanimous high-confidence lens: ra_174.515571_dec_3.249472  label=1  n_correct=8
+[表] D:\AST\paper_eval\results\case_study_layer_table.md
+[表] D:\AST\paper_eval\results\case_study_model_stats.md
+
+[9] 真实透镜按难度分层后各模型的命中数（分母为各层样本数）
+模型                      极限(1)    困难(3)    中等(7)    简单(5)    合计/16
+ResNet18 (base)             0        1        5        5       11
+ResNet18 + MTL              0        0        5        5       10
+ResNet18 + DA               0        1        4        5       10
+ResNet18 + MTL + DA         0        1        7        5       13
+Swin-T (base)               0        0        3        5        8
+Swin-T + MTL                0        0        4        5        9
+Swin-T + DA                 0        3        6        5       14
+Swin-T + MTL + DA           0        2        7        5       14

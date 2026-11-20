@@ -1,0 +1,9 @@
+experiment_dir,backbone,variant,mtl,domain_adaptation,epochs,batch_size,learning_rate,pretrained,input_size,w_bin,w_count,w_rein,w_domain,pos_weight,checkpoint_released,optimizer,weight_decay
+resnet18_gri,ResNet18,base,no,no,300,32,0.0001,false,224,,,,,3.0,no,Adam,from config
+resnet18_gri_mtl,ResNet18,+MTL,yes,no,300,32,0.0001,false,224,1.0,0.3,0.2,,3.0,no,Adam,none
+resnet18_gri_da_no_mtl,ResNet18,+DA,no,yes,300,32,0.0001,false,224,,,,1.0,3.0,no,AdamW,1e-3
+resnet18_gri_mtl_da,ResNet18,+MTL+DA,yes,yes,300,32,0.0001,false,224,1.0,0.3,0.2,1.0,3.0,yes,AdamW,1e-4
+gri_swin_transformer,Swin-T,base,no,no,300,32,0.0001,false,224,,,,,3.0,no,AdamW,0.05
+gri_swin_transformer_mtl,Swin-T,+MTL,yes,no,300,32,0.0001,false,224,1.0,0.3,0.2,,3.0,no,AdamW,0.05
+gri_swin_transformer_da_no_mtl,Swin-T,+DA,no,yes,300,32,0.0001,false,224,,,,1.0,3.0,no,AdamW,0.05
+gri_swin_transformer_dann_new,Swin-T,+MTL+DA,yes,yes,300,32,0.0001,false,224,1.0,0.3,0.2,1.0,3.0,no,AdamW,0.05

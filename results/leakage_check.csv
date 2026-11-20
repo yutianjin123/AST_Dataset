@@ -1,0 +1,11 @@
+﻿集合A,集合B,A规模,B规模,重叠数,占A比例,占B比例
+train(resnet18_gri),val(resnet18_gri),24000,6000,0,0.0,0.0
+train(resnet18_gri),train(swin_mtl),24000,24000,24000,1.0,1.0
+train(resnet18_gri),val(swin_mtl),24000,6000,0,0.0,0.0
+train(resnet18_gri),test516_real,24000,516,2,8.333333333333333e-05,0.003875968992248062
+val(resnet18_gri),train(swin_mtl),6000,24000,0,0.0,0.0
+val(resnet18_gri),val(swin_mtl),6000,6000,6000,1.0,1.0
+val(resnet18_gri),test516_real,6000,516,0,0.0,0.0
+train(swin_mtl),val(swin_mtl),24000,6000,0,0.0,0.0
+train(swin_mtl),test516_real,24000,516,2,8.333333333333333e-05,0.003875968992248062
+val(swin_mtl),test516_real,6000,516,0,0.0,0.0
